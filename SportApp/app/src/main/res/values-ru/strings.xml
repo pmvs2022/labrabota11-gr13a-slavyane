@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SportApp</string>
+    <string name="trainings">Тренировки</string>
+    <string name="training">Тренировка</string>
+    <string name="calendar">Календарь</string>
+    <string name="legs">Ноги</string>
+    <string name="back">Спина</string>
+    <string name="press">Пресс</string>
+    <string name="biceps">Бицепс</string>
+    <string name="general">Общая тренировка</string>
+</resources>

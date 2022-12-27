@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">SportApp</string>
+    <string name="trainings">Trainings</string>
+    <string name="training">Training</string>
+    <string name="calendar">Calendar</string>
+    <string name="legs">Legs</string>
+    <string name="back">Back</string>
+    <string name="press">Press</string>
+    <string name="biceps">Biceps</string>
+    <string name="general">General training</string>
 </resources>
