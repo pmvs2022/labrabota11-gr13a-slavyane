@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SportApp"
         tools:targetApi="31">
+        <activity android:name=".TypedTrainingsActivity"
+            android:label="@string/training"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

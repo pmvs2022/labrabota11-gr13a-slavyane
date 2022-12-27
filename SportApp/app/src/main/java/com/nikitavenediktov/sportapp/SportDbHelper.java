@@ -2,13 +2,22 @@ package com.nikitavenediktov.sportapp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Pair;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.HashMap;
+
 public class SportDbHelper extends SQLiteOpenHelper {
+
+    //Singleton pattern
+    private static SportDbHelper helperInstance;
 
     // Database
     public static final String DATABASE_NAME = "Sport.db";
@@ -30,7 +39,7 @@ public class SportDbHelper extends SQLiteOpenHelper {
 
     //Table Training
     public static final String TABLE_TRAINING_NAME = "Training";
-    public static final String COLUMN_FK_Type = "Type_id";
+    public static final String COLUMN_FK_TYPE = "Type_id";
 
     //Table Training & Exercise
     public static final String TABLE_TRAINING_EXERCISE_NAME = "Training_Exercise";
@@ -48,6 +57,13 @@ public class SportDbHelper extends SQLiteOpenHelper {
         this.context = context;
     }
 
+    public static synchronized SportDbHelper getInstance(Context context)
+    {
+        if (helperInstance == null)
+            helperInstance = new SportDbHelper(context.getApplicationContext());
+
+        return helperInstance;
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db)
@@ -125,17 +141,17 @@ public class SportDbHelper extends SQLiteOpenHelper {
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COLUMN_TITLE + " TEXT NOT NULL," +
                 COLUMN_GIF + " TEXT NOT NULL," +
-                COLUMN_DESC + " TEXT CHECK(" + COLUMN_DESC + " LIKE '[0-9]+s?'));";
+                COLUMN_DESC + " TEXT);";
 
         db.execSQL(query);
     }
 
     private void createTrainingTable(SQLiteDatabase db)
     {
-        String query = "CREATE TABLE " + TABLE_TRAINING_EXERCISE_NAME + "(" +
+        String query = "CREATE TABLE " + TABLE_TRAINING_NAME + "(" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                COLUMN_FK_Type + " INTEGER NOT NULL," +
-                "FOREIGN KEY(" + COLUMN_FK_Type + ") REFERENCES " + TABLE_TYPE_NAME
+                COLUMN_FK_TYPE + " INTEGER NOT NULL," +
+                "FOREIGN KEY(" + COLUMN_FK_TYPE + ") REFERENCES " + TABLE_TYPE_NAME
                 + "(" + COLUMN_ID + "));";
 
         db.execSQL(query);
@@ -143,7 +159,7 @@ public class SportDbHelper extends SQLiteOpenHelper {
 
     private void createTrainingExerciseTable(SQLiteDatabase db)
     {
-        String query = "CREATE TABLE " + TABLE_TRAINING_NAME + "(" +
+        String query = "CREATE TABLE " + TABLE_TRAINING_EXERCISE_NAME + "(" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COLUMN_FK_TRAINING + " INTEGER NOT NULL," +
                 COLUMN_FK_EXERCISE + " INTEGER NOT NULL," +
@@ -250,10 +266,12 @@ public class SportDbHelper extends SQLiteOpenHelper {
         cursor.close();
 
         //insert training
-        cv.put(COLUMN_FK_Type, type_id);
+        cv.put(COLUMN_FK_TYPE, type_id);
         training_id = db.insert(TABLE_TRAINING_NAME, null, cv);
         if (training_id == -1)
-            throw new DbException(TABLE_TRAINING_NAME + "INSERT: " + type);
+            throw new DbException(TABLE_TRAINING_NAME + " INSERT: " + type);
+        else
+            System.out.println("SUCCESS");
 
         //insert training-exercise dependencies
         for(int i = 0; i < exercises_title_desc.length; ++i)
@@ -281,11 +299,78 @@ public class SportDbHelper extends SQLiteOpenHelper {
             //insert training-exercise dependency
             long pair_id = db.insert(TABLE_TRAINING_EXERCISE_NAME, null, cv);
             if (pair_id == -1)
-                throw new DbException(TABLE_TRAINING_EXERCISE_NAME + "INSERT: " + exercises_title_desc[i][0]);
+                throw new DbException(TABLE_TRAINING_EXERCISE_NAME + " INSERT: " + exercises_title_desc[i][0]);
         }
 
         cursor.close();
     }
+
+    public ArrayList<Integer> getTypedTrainings(String type)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues cv = new ContentValues();
+        ArrayList<Integer> training_ids = new ArrayList<>();
+        int id_index, type_id;
+
+        // Getting type id
+        Cursor cursor = db.query(TABLE_TYPE_NAME, new String[]{COLUMN_ID}, COLUMN_TITLE + "=?",
+                new String[] {type}, null, null, null);
+
+        if (cursor == null || !cursor.moveToFirst())
+            return training_ids;
+
+        id_index = cursor.getColumnIndex(COLUMN_ID);
+
+        if (id_index == -1)
+            return training_ids;
+
+        type_id = cursor.getInt(id_index);
+
+        cursor = db.query(TABLE_TRAINING_NAME, new String[]{COLUMN_ID}, COLUMN_FK_TYPE + "=?",
+                new String[]{Integer.toString(type_id)}, null, null, null);
+
+        if (cursor == null || !cursor.moveToFirst())
+            return training_ids;
+
+        id_index = cursor.getColumnIndex(COLUMN_ID);
+
+        do {
+            training_ids.add(cursor.getInt(id_index));
+        } while(cursor.moveToNext());
+
+
+        cursor.close();
+      //  db.close();
+
+        return training_ids;
+    }
+
+    public ArrayList<Pair<String, String>> getTypes()
+    {
+        int title_index;
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Pair<String, String>> types = new ArrayList<>();
+        Resources resources = context.getResources();
+
+        Cursor cursor = db.query(TABLE_TYPE_NAME, new String[]{COLUMN_TITLE}, null,
+                null, null, null, null);
+        if (cursor != null && cursor.moveToFirst())
+        {
+            title_index = cursor.getColumnIndex(COLUMN_TITLE);
+
+            do {
+                String temp_type = cursor.getString(title_index);
+                types.add(new Pair<String, String>(temp_type,
+                        resources.getString(resources.getIdentifier(temp_type, "string", context.getPackageName()))));
+            } while(cursor.moveToNext());
+
+            cursor.close();
+        }
+
+      //  db.close();
+        return types;
+    }
+
     public class DbException extends  Exception
     {
         public DbException(String message)
