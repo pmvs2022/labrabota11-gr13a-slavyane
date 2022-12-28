@@ -3,9 +3,25 @@
     <string name="trainings">Trainings</string>
     <string name="training">Training</string>
     <string name="calendar">Calendar</string>
+    <string name="start">Start</string>
+    <string name="sec">sec</string>
+
     <string name="legs">Legs</string>
     <string name="back">Back</string>
     <string name="press">Press</string>
     <string name="biceps">Biceps</string>
     <string name="general">General training</string>
+
+    <string name="twisting">Twisting</string>
+    <string name="elbow_plank">Elbow plank</string>
+    <string name="horizontal_scissors">Horizontal scissors</string>
+    <string name="climber">Climber</string>
+    <string name="legs_lift">Legs lift</string>
+    <string name="side_twisting">Side twisting</string>
+    <string name="side_plank">Side plank</string>
+    <string name="legs_swinging">Legs swinging</string>
+    <string name="glute_bridge_steps">Glute bridge steps</string>
+    <string name="dumbbell_swinging">Dumbbell swinging</string>
+    <string name="reverse_lunges">Reverse lunges</string>
+    <string name="situps">Sit-ups</string>
 </resources>

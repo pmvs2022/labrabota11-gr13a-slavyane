@@ -104,7 +104,7 @@ public class SportDbHelper extends SQLiteOpenHelper {
             insertExercise(db, "glute_bridge_steps", "glute_bridge_steps.gif", "20");
             insertExercise(db, "dumbbell_swinging", "dumbbell_swinging.gif", "10");
             insertExercise(db, "reverse_lunges", "reverse_lunges.gif", "14");
-            insertExercise(db, "situps", "reverse_lunges.gif", "30");
+            insertExercise(db, "situps", "situps.gif", "30");
 
             //press N1
             insertTraining(db, "press", new String[][]{
@@ -112,6 +112,16 @@ public class SportDbHelper extends SQLiteOpenHelper {
                     {"elbow_plank", "20s"},
                     {"horizontal_scissors", "16"},
                     {"climber", "14"}
+            });
+
+            //press N2
+            insertTraining(db, "press", new String[][]{
+                    {"twisting", "20"},
+                    {"legs_lift", "15"},
+                    {"side_twisting", "20"},
+                    {"elbow_plank", "50s"},
+                    {"side_plank", "35s"},
+                    {"legs_swinging", "45s"}
             });
 
             db.setTransactionSuccessful();
@@ -370,6 +380,53 @@ public class SportDbHelper extends SQLiteOpenHelper {
       //  db.close();
         return types;
     }
+
+    public ArrayList<Exercise> getTrainingExercises(int training_id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int exercise_index;
+
+        ArrayList<Exercise> exercises = new ArrayList<>();
+
+        Cursor cursor = db.query(TABLE_TRAINING_EXERCISE_NAME, new String[]{COLUMN_FK_EXERCISE},
+                COLUMN_FK_TRAINING + "=?",
+                new String[]{Integer.toString(training_id)}, null, null, null);
+
+        if (cursor == null || !cursor.moveToFirst())
+            return exercises;
+        exercise_index = cursor.getColumnIndex(COLUMN_FK_EXERCISE);
+
+        do {
+            int ex_id = cursor.getInt(exercise_index);
+            exercises.add(getExercise(ex_id));
+        } while(cursor.moveToNext());
+
+        return exercises;
+    }
+
+    private Exercise getExercise(int id)
+    {
+        int id_index, title_index, gif_index, desc_index;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_EXERCISE_NAME,null, COLUMN_ID + "=?",
+                new String[]{Integer.toString(id)}, null, null, null);
+
+        if (cursor == null || !cursor.moveToFirst())
+            return null;
+
+        id_index = cursor.getColumnIndex(COLUMN_ID);
+        title_index = cursor.getColumnIndex(COLUMN_TITLE);
+        gif_index = cursor.getColumnIndex(COLUMN_GIF);
+        desc_index = cursor.getColumnIndex(COLUMN_DESC);
+
+        Exercise exercise = new Exercise(cursor.getInt(id_index), cursor.getString(title_index),
+                cursor.getString(gif_index), cursor.getString(desc_index));
+
+        return exercise;
+    }
+
 
     public class DbException extends  Exception
     {
