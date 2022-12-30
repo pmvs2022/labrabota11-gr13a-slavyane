@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background">#1D95A5</color>
     <color name="pressed">#1DA59A</color>
+    <color name="progress">#009688</color>
 </resources>
