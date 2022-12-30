@@ -15,6 +15,9 @@
     <string name="total_time">Total time:</string>
     <string name="share">Share result</string>
     <string name="back_to_main_page">Back to main page</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
 
     <string name="legs">Legs</string>
     <string name="back">Back</string>

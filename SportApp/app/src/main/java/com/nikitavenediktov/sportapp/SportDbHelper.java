@@ -40,6 +40,7 @@ public class SportDbHelper extends SQLiteOpenHelper {
     //Table Training
     public static final String TABLE_TRAINING_NAME = "Training";
     public static final String COLUMN_FK_TYPE = "Type_id";
+    public static final String COLUMN_COMPLEXITY = "Complexity";
 
     //Table Training & Exercise
     public static final String TABLE_TRAINING_EXERCISE_NAME = "Training_Exercise";
@@ -87,27 +88,27 @@ public class SportDbHelper extends SQLiteOpenHelper {
             insertType(db, "general");
 
             //for press N1
-            insertExercise(db, "twisting", "twisting.gif", "12");
-            insertExercise(db, "elbow_plank", "elbow_plank.gif", "20s");
-            insertExercise(db, "horizontal_scissors", "horizontal_scissors.gif", "16");
-            insertExercise(db, "climber", "climber.gif", "14");
+            insertExercise(db, "twisting", "12");
+            insertExercise(db, "elbow_plank", "20s");
+            insertExercise(db, "horizontal_scissors",  "16");
+            insertExercise(db, "climber", "14");
 
             //for press N2
-            insertExercise(db, "twisting", "twisting.gif", "20");
-            insertExercise(db, "legs_lift", "legs_lift.gif", "15");
-            insertExercise(db, "side_twisting", "side_twisting.gif", "20");
-            insertExercise(db, "elbow_plank", "elbow_plank.gif", "50s");
-            insertExercise(db, "side_plank", "side_plank.gif", "35s");
-            insertExercise(db, "legs_swinging", "legs_swinging.gif", "45s");
+            insertExercise(db, "twisting", "20");
+            insertExercise(db, "legs_lift", "15");
+            insertExercise(db, "side_twisting", "20");
+            insertExercise(db, "elbow_plank", "50s");
+            insertExercise(db, "side_plank", "35s");
+            insertExercise(db, "legs_swinging", "45s");
 
             //for legs N1
-            insertExercise(db, "glute_bridge_steps", "glute_bridge_steps.gif", "20");
-            insertExercise(db, "dumbbell_swinging", "dumbbell_swinging.gif", "10");
-            insertExercise(db, "reverse_lunges", "reverse_lunges.gif", "14");
-            insertExercise(db, "situps", "situps.gif", "30");
+            insertExercise(db, "glute_bridge_steps", "20");
+            insertExercise(db, "dumbbell_swinging", "10");
+            insertExercise(db, "reverse_lunges", "14");
+            insertExercise(db, "situps",  "30");
 
             //press N1
-            insertTraining(db, "press", new String[][]{
+            insertTraining(db, "easy", "press", new String[][]{
                     {"twisting", "12"},
                     {"elbow_plank", "20s"},
                     {"horizontal_scissors", "16"},
@@ -115,7 +116,7 @@ public class SportDbHelper extends SQLiteOpenHelper {
             });
 
             //press N2
-            insertTraining(db, "press", new String[][]{
+            insertTraining(db, "hard", "press", new String[][]{
                     {"twisting", "20"},
                     {"legs_lift", "15"},
                     {"side_twisting", "20"},
@@ -150,7 +151,6 @@ public class SportDbHelper extends SQLiteOpenHelper {
         String query = "CREATE TABLE " + TABLE_EXERCISE_NAME + "(" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COLUMN_TITLE + " TEXT NOT NULL," +
-                COLUMN_GIF + " TEXT NOT NULL," +
                 COLUMN_DESC + " TEXT);";
 
         db.execSQL(query);
@@ -161,6 +161,8 @@ public class SportDbHelper extends SQLiteOpenHelper {
         String query = "CREATE TABLE " + TABLE_TRAINING_NAME + "(" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COLUMN_FK_TYPE + " INTEGER NOT NULL," +
+                COLUMN_COMPLEXITY + " TEXT NOT NULL," +
+                "CHECK (" + COLUMN_COMPLEXITY + " IN ('easy', 'medium', 'hard'))," +
                 "FOREIGN KEY(" + COLUMN_FK_TYPE + ") REFERENCES " + TABLE_TYPE_NAME
                 + "(" + COLUMN_ID + "));";
 
@@ -208,14 +210,13 @@ public class SportDbHelper extends SQLiteOpenHelper {
             throw new DbException(TABLE_TYPE_NAME + " INSERT: " + title);
     }
 
-    private void insertExercise(SQLiteDatabase db, String title, String gif, String description)
+    private void insertExercise(SQLiteDatabase db, String title, String description)
             throws DbException
     {
         ContentValues cv = new ContentValues();
         long res;
 
         cv.put(COLUMN_TITLE, title);
-        cv.put(COLUMN_GIF, gif);
         cv.put(COLUMN_DESC, description);
 
         res = db.insert(TABLE_EXERCISE_NAME, null, cv);
@@ -253,7 +254,7 @@ public class SportDbHelper extends SQLiteOpenHelper {
     {
         db.execSQL("DROP TABLE IF EXISTS " + table);
     }
-    private void insertTraining(SQLiteDatabase db, String type, String[][] exercises_title_desc)
+    private void insertTraining(SQLiteDatabase db, String complexity, String type, String[][] exercises_title_desc)
             throws DbException {
         int type_id, id_index;
         long training_id;
@@ -277,6 +278,7 @@ public class SportDbHelper extends SQLiteOpenHelper {
 
         //insert training
         cv.put(COLUMN_FK_TYPE, type_id);
+        cv.put(COLUMN_COMPLEXITY, complexity);
         training_id = db.insert(TABLE_TRAINING_NAME, null, cv);
         if (training_id == -1)
             throw new DbException(TABLE_TRAINING_NAME + " INSERT: " + type);
@@ -315,44 +317,46 @@ public class SportDbHelper extends SQLiteOpenHelper {
         cursor.close();
     }
 
-    public ArrayList<Integer> getTypedTrainings(String type)
+    public ArrayList<Pair<Integer, String>> getTypedTrainings(String type)
     {
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues cv = new ContentValues();
-        ArrayList<Integer> training_ids = new ArrayList<>();
-        int id_index, type_id;
+        ArrayList<Pair<Integer, String>> trainings = new ArrayList<>();
+        int id_index, complexity_index, type_id;
+        String complexity;
 
         // Getting type id
         Cursor cursor = db.query(TABLE_TYPE_NAME, new String[]{COLUMN_ID}, COLUMN_TITLE + "=?",
                 new String[] {type}, null, null, null);
 
         if (cursor == null || !cursor.moveToFirst())
-            return training_ids;
+            return trainings;
 
         id_index = cursor.getColumnIndex(COLUMN_ID);
 
         if (id_index == -1)
-            return training_ids;
+            return trainings;
 
         type_id = cursor.getInt(id_index);
 
-        cursor = db.query(TABLE_TRAINING_NAME, new String[]{COLUMN_ID}, COLUMN_FK_TYPE + "=?",
+        cursor = db.query(TABLE_TRAINING_NAME, new String[]{COLUMN_ID, COLUMN_COMPLEXITY}, COLUMN_FK_TYPE + "=?",
                 new String[]{Integer.toString(type_id)}, null, null, null);
 
         if (cursor == null || !cursor.moveToFirst())
-            return training_ids;
+            return trainings;
 
         id_index = cursor.getColumnIndex(COLUMN_ID);
+        complexity_index = cursor.getColumnIndex(COLUMN_COMPLEXITY);
 
         do {
-            training_ids.add(cursor.getInt(id_index));
+            trainings.add(new Pair<Integer, String>(cursor.getInt(id_index), cursor.getString(complexity_index)));
         } while(cursor.moveToNext());
 
 
         cursor.close();
       //  db.close();
 
-        return training_ids;
+        return trainings;
     }
 
     public ArrayList<Pair<String, String>> getTypes()
@@ -418,11 +422,9 @@ public class SportDbHelper extends SQLiteOpenHelper {
 
         id_index = cursor.getColumnIndex(COLUMN_ID);
         title_index = cursor.getColumnIndex(COLUMN_TITLE);
-        gif_index = cursor.getColumnIndex(COLUMN_GIF);
         desc_index = cursor.getColumnIndex(COLUMN_DESC);
 
-        Exercise exercise = new Exercise(cursor.getInt(id_index), cursor.getString(title_index),
-                cursor.getString(gif_index), cursor.getString(desc_index));
+        Exercise exercise = new Exercise(cursor.getInt(id_index), cursor.getString(title_index), cursor.getString(desc_index));
 
         return exercise;
     }

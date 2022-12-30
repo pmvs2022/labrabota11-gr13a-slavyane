@@ -4,6 +4,7 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 public class TypedTrainingsActivity extends AppCompatActivity
 {
     private String type_title;
-    private ArrayList<Integer> training_ids;
+    private ArrayList<Pair<Integer, String>> trainings_pair;
 
     RecyclerView recyclerView;
 
@@ -39,8 +40,8 @@ public class TypedTrainingsActivity extends AppCompatActivity
         setTitle(getTitle() + ": " + getResources()
                 .getString(getResources().getIdentifier(type_title, "string", getPackageName())));
 
-        training_ids = SportDbHelper.getInstance(this).getTypedTrainings(type_title);
-        adapter = new TypedTrainingsAdapter(TypedTrainingsActivity.this, training_ids);
+        trainings_pair = SportDbHelper.getInstance(this).getTypedTrainings(type_title);
+        adapter = new TypedTrainingsAdapter(TypedTrainingsActivity.this, trainings_pair);
 
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
