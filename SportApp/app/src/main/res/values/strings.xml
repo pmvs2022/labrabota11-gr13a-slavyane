@@ -5,6 +5,16 @@
     <string name="calendar">Calendar</string>
     <string name="start">Start</string>
     <string name="sec">sec</string>
+    <string name="min">min</string>
+    <string name="cont">Continue</string>
+    <string name="times">times</string>
+    <string name="rest">Rest</string>
+    <string name="next_exercise">Next exercise:</string>
+    <string name="training_over">Training is over</string>
+    <string name="save_training_fail">Failed to save training record</string>
+    <string name="total_time">Total time:</string>
+    <string name="share">Share result</string>
+    <string name="back_to_main_page">Back to main page</string>
 
     <string name="legs">Legs</string>
     <string name="back">Back</string>
