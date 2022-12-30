@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.text.Layout;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,17 +23,17 @@ public class TypedTrainingsAdapter extends RecyclerView.Adapter<TypedTrainingsAd
 
     private Context context;
 
-    private ArrayList<Integer> training_ids;
+    private ArrayList<Pair<Integer, String>> trainings_pair;
     private ArrayList<String> trainings;
 
-    public TypedTrainingsAdapter(Context context, ArrayList<Integer> training_ids)
+    public TypedTrainingsAdapter(Context context, ArrayList<Pair<Integer, String>> trainings_pair)
     {
         this.context = context;
-        this.training_ids = training_ids;
+        this.trainings_pair = trainings_pair;
 
         trainings = new ArrayList<>();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            training_ids.forEach(id -> trainings.add(context.getResources().getString(R.string.training) + " #" + id));
+            trainings_pair.forEach(pair -> trainings.add(context.getResources().getString(R.string.training) + " #" + pair.first));
         }
     }
 
@@ -50,6 +51,8 @@ public class TypedTrainingsAdapter extends RecyclerView.Adapter<TypedTrainingsAd
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position)
     {
         holder.training_txt.setText(trainings.get(position));
+        holder.complexity_txt.setText(context.getString(context.getResources()
+                .getIdentifier(trainings_pair.get(position).second, "string", context.getPackageName())));
     }
 
     @Override
@@ -65,7 +68,7 @@ public class TypedTrainingsAdapter extends RecyclerView.Adapter<TypedTrainingsAd
 
         Intent intent = new Intent(context, TrainingIntroActivity.class);
 
-        intent.putExtra("training_id", Integer.toString(training_ids.get(index)));
+        intent.putExtra("training_id", Integer.toString(trainings_pair.get(index).first));
         ((Activity) context).startActivity(intent);
 
         //   Toast.makeText(context, trainings.get(index), Toast.LENGTH_SHORT)
@@ -74,13 +77,14 @@ public class TypedTrainingsAdapter extends RecyclerView.Adapter<TypedTrainingsAd
 
     public class MyViewHolder extends RecyclerView.ViewHolder
     {
-        TextView training_txt;
+        TextView training_txt, complexity_txt;
 
         public MyViewHolder(@NonNull View itemView)
         {
             super(itemView);
 
             training_txt = (TextView) itemView.findViewById(R.id.training_num);
+            complexity_txt = (TextView) itemView.findViewById(R.id.level_tv);
         }
 
     }

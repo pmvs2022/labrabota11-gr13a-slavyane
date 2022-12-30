@@ -15,6 +15,9 @@
     <string name="total_time">Общее время:</string>
     <string name="share">Поделиться результатом</string>
     <string name="back_to_main_page">На главную страницу</string>
+    <string name="easy">Легкая</string>
+    <string name="medium">Средняя</string>
+    <string name="hard">Тяжелая</string>
 
     <string name="legs">Ноги</string>
     <string name="back">Спина</string>
