@@ -18,6 +18,12 @@
     <string name="easy">Легкая</string>
     <string name="medium">Средняя</string>
     <string name="hard">Тяжелая</string>
+    <string name="share_msg_start">Привет, Я только что сделал(а):</string>
+    <string name="share_msg_time">Это заняло у меня </string>
+    <string name="share_msg_end">Испытай себя в </string>
+    <string name="share_via">Поделиться  с помощью</string>
+    <string name="sport_time">Пришло время немного позаниматься!</string>
+    <string name="hey">Эй</string>
 
     <string name="legs">Ноги</string>
     <string name="back">Спина</string>
