@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="364dp"
         android:background="@drawable/button_shape"
-        android:drawableEnd="@android:drawable/ic_menu_share"
+        android:drawableEnd="@drawable/ic_share"
         android:padding="3dp"
         android:text="@string/share"
         android:textColor="@color/white"

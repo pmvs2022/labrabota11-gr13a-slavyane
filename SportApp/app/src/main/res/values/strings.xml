@@ -18,6 +18,12 @@
     <string name="easy">Easy</string>
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
+    <string name="share_msg_start">Hello, I\'ve just done:</string>
+    <string name="share_msg_time">It took me </string>
+    <string name="share_msg_end">Challenge yourself in </string>
+    <string name="share_via">Share via</string>
+    <string name="sport_time">It\'s time to do some sport!</string>
+    <string name="hey">Hey!</string>
 
     <string name="legs">Legs</string>
     <string name="back">Back</string>
