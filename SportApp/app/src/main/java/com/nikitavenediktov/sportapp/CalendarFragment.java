@@ -1,5 +1,7 @@
 package com.nikitavenediktov.sportapp;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Layout;
@@ -13,10 +15,14 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
+import com.github.sundeepk.compactcalendarview.domain.Event;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -26,8 +32,16 @@ public class CalendarFragment extends Fragment
     CompactCalendarView calendar;
     TextView dateTextView;
 
-    private SimpleDateFormat dateFormatMonth = new SimpleDateFormat("MMM yyyy", Locale.getDefault());
+    private ArrayList<DoneTraining> doneTrainings;
+    private ArrayList<Event> doneTrainingsEvents;
 
+
+    public static final SimpleDateFormat DATE_FORMAT_MONTH =
+            new SimpleDateFormat("MMM yyyy", Locale.getDefault());
+    public static final SimpleDateFormat DATE_FORMAT_DONE_TRAINING =
+            new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.getDefault());
+    public static final SimpleDateFormat DATE_FORMAT_DAY =
+            new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -44,42 +58,58 @@ public class CalendarFragment extends Fragment
         dateTextView = (TextView) rootVew.findViewById(R.id.date_tv);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            dateTextView.setText(DateTimeFormatter.ofPattern("MMM yyyy").format(LocalDateTime.now()));
+            dateTextView.setText(DATE_FORMAT_MONTH.format(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant())));
         }
 
         calendar.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
+                Intent intent = new Intent(getActivity(), DayDoneTrainingsActivity.class);
+                intent.putExtra("date", DATE_FORMAT_DAY.format(dateClicked));
 
+                startActivity(intent);
             }
 
             @Override
             public void onMonthScroll(Date firstDayOfNewMonth) {
-                dateTextView.setText(dateFormatMonth.format(firstDayOfNewMonth));
+                dateTextView.setText(DATE_FORMAT_MONTH.format(firstDayOfNewMonth));
             }
         });
+
+        // setting done trainings
+        doneTrainings = SportDbHelper.getInstance(rootVew.getContext()).getDoneTrainings(null);
+        doneTrainingsEvents = new ArrayList<>();
+
+        for(DoneTraining doneTraining : doneTrainings)
+        {
+            doneTrainingsEvents.add(DoneTrainingToEvent(doneTraining, rootVew.getContext()));
+        }
+
+        calendar.addEvents(doneTrainingsEvents);
+        calendar.setUseThreeLetterAbbreviation(true);
+        calendar.shouldDrawIndicatorsBelowSelectedDays(true);
+
         return rootVew;
     }
 
-     /* CalendarView calendar;
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState)
+    private Event DoneTrainingToEvent(DoneTraining doneTraining, Context context)
     {
-        super.onCreate(savedInstanceState);
+        try {
+            long millis = DATE_FORMAT_DONE_TRAINING.parse(doneTraining.start_date).getTime();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            {
+                return new Event(context.getColor(context.getResources()
+                        .getIdentifier(doneTraining.type, "color", context.getPackageName())), millis,
+                        context.getResources().getString(R.string.training) + " #" + Integer.toString(doneTraining.training_id));
+            }
+        }
+        catch(ParseException ex)
+        {
+            System.err.println(ex.getMessage());
+            return null;
+        }
+
+        return null;
+        // return new Event(context.getResources().getColor(context.getResources().getIdentifier(doneTraining.)));
     }
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
-    {
-        View rootView = inflater.inflate(R.layout.calendar_tab, container, false);
-
-        calendar = (CalendarView)rootView.findViewById(R.id.calendarView);
-
-        calendar.setDate(Calendar.getInstance().getTimeInMillis(),false,true);
-        return rootView;
-    }*/
-
 }

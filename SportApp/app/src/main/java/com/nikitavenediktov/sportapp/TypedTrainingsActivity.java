@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class TypedTrainingsActivity extends AppCompatActivity
 {
     private String type_title;
-    private ArrayList<Pair<Integer, String>> trainings_pair;
+    private ArrayList<Training> trainings;
 
     RecyclerView recyclerView;
 
@@ -40,8 +40,8 @@ public class TypedTrainingsActivity extends AppCompatActivity
         setTitle(getTitle() + ": " + getResources()
                 .getString(getResources().getIdentifier(type_title, "string", getPackageName())));
 
-        trainings_pair = SportDbHelper.getInstance(this).getTypedTrainings(type_title);
-        adapter = new TypedTrainingsAdapter(TypedTrainingsActivity.this, trainings_pair);
+        trainings= SportDbHelper.getInstance(this).getTypedTrainings(type_title);
+        adapter = new TypedTrainingsAdapter(TypedTrainingsActivity.this, trainings);
 
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 

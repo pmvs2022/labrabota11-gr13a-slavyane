@@ -15,6 +15,11 @@
 
         <receiver android:name=".ReminderBroadcast"/>
 
+        <activity android:name=".DayDoneTrainingsActivity"
+            android:label="@string/back_to_main_page"
+            android:theme="@style/Theme.WithActionBar"
+            android:parentActivityName=".MainActivity"/>
+
         <activity android:name=".TrainingOverActivity"
             android:label="@string/back_to_main_page"
             android:theme="@style/Theme.WithActionBar"

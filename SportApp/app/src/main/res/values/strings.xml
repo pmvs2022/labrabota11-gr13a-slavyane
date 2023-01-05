@@ -24,6 +24,8 @@
     <string name="share_via">Share via</string>
     <string name="sport_time">It\'s time to do some sport!</string>
     <string name="hey">Hey!</string>
+    <string name="duration">Duration:</string>
+    <string name="start_time">Start time:</string>
 
     <string name="legs">Legs</string>
     <string name="back">Back</string>

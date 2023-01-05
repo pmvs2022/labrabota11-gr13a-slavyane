@@ -23,7 +23,9 @@
     <string name="share_msg_end">Испытай себя в </string>
     <string name="share_via">Поделиться  с помощью</string>
     <string name="sport_time">Пришло время немного позаниматься!</string>
-    <string name="hey">Эй</string>
+    <string name="hey">Эй!</string>
+    <string name="duration">Продолжительность:</string>
+    <string name="start_time">Время начала:</string>
 
     <string name="legs">Ноги</string>
     <string name="back">Спина</string>
