@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class TrainingListFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
-    private ArrayList<Pair<String, String>> types;
+    private ArrayList<String> types;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -36,7 +36,8 @@ public class TrainingListFragment extends ListFragment implements AdapterView.On
         ArrayList<String> types_titles = new ArrayList<>();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            types.forEach(pair -> types_titles.add(pair.second));
+            types.forEach(type -> types_titles.add(getActivity().getResources().getString(getActivity()
+                    .getResources().getIdentifier(type, "string", getActivity().getPackageName()))));
         }
         getListView().setOnItemClickListener(this);
 
@@ -48,7 +49,7 @@ public class TrainingListFragment extends ListFragment implements AdapterView.On
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
         Intent intent = new Intent(this.getActivity(), TypedTrainingsActivity.class);
-        intent.putExtra("type_title", types.get(position).first);
+        intent.putExtra("type_title", types.get(position));
         startActivity(intent);
     }
 

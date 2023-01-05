@@ -23,17 +23,17 @@ public class TypedTrainingsAdapter extends RecyclerView.Adapter<TypedTrainingsAd
 
     private Context context;
 
-    private ArrayList<Pair<Integer, String>> trainings_pair;
-    private ArrayList<String> trainings;
+    private ArrayList<Training> trainings;
+    private ArrayList<String> trainings_titles;
 
-    public TypedTrainingsAdapter(Context context, ArrayList<Pair<Integer, String>> trainings_pair)
+    public TypedTrainingsAdapter(Context context, ArrayList<Training> trainings)
     {
         this.context = context;
-        this.trainings_pair = trainings_pair;
+        this.trainings = trainings;
 
-        trainings = new ArrayList<>();
+        trainings_titles = new ArrayList<>();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            trainings_pair.forEach(pair -> trainings.add(context.getResources().getString(R.string.training) + " #" + pair.first));
+            trainings.forEach(training -> trainings_titles.add(context.getResources().getString(R.string.training) + " #" + training.id));
         }
     }
 
@@ -50,9 +50,9 @@ public class TypedTrainingsAdapter extends RecyclerView.Adapter<TypedTrainingsAd
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position)
     {
-        holder.training_txt.setText(trainings.get(position));
+        holder.training_txt.setText(trainings_titles.get(position));
         holder.complexity_txt.setText(context.getString(context.getResources()
-                .getIdentifier(trainings_pair.get(position).second, "string", context.getPackageName())));
+                .getIdentifier(trainings.get(position).complexity, "string", context.getPackageName())));
     }
 
     @Override
@@ -68,7 +68,7 @@ public class TypedTrainingsAdapter extends RecyclerView.Adapter<TypedTrainingsAd
 
         Intent intent = new Intent(context, TrainingIntroActivity.class);
 
-        intent.putExtra("training_id", Integer.toString(trainings_pair.get(index).first));
+        intent.putExtra("training_id", Integer.toString(trainings.get(index).id));
         ((Activity) context).startActivity(intent);
 
         //   Toast.makeText(context, trainings.get(index), Toast.LENGTH_SHORT)

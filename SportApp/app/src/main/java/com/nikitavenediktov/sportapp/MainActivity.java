@@ -15,12 +15,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.github.sundeepk.compactcalendarview.domain.Event;
 import com.google.android.material.tabs.TabLayout;
 import com.nikitavenediktov.sportapp.databinding.ActivityMainBinding;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String NOTIFICATION_CHANNEL_ID = "notifySport";
+
     private ActivityMainBinding binding;
 
     @Override
