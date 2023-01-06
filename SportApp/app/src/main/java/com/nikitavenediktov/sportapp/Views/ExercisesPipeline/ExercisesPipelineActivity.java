@@ -1,4 +1,4 @@
-package com.nikitavenediktov.sportapp;
+package com.nikitavenediktov.sportapp.Views.ExercisesPipeline;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -6,15 +6,18 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Chronometer;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.nikitavenediktov.sportapp.Models.Exercise;
+import com.nikitavenediktov.sportapp.R;
+import com.nikitavenediktov.sportapp.Db.SportDbHelper;
+import com.nikitavenediktov.sportapp.Views.TrainingOver.TrainingOverActivity;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

@@ -1,8 +1,8 @@
-package com.nikitavenediktov.sportapp;
+package com.nikitavenediktov.sportapp.Models;
 
 public class Training {
-    int id, type_id;
-    String type, complexity;
+    public int id, type_id;
+    public String type, complexity;
 
     public Training(int id, int type_id, String type, String complexity)
     {

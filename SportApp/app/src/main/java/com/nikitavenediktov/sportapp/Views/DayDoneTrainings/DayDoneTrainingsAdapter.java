@@ -1,20 +1,21 @@
-package com.nikitavenediktov.sportapp;
+package com.nikitavenediktov.sportapp.Views.DayDoneTrainings;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextClock;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nikitavenediktov.sportapp.Models.DoneTraining;
+import com.nikitavenediktov.sportapp.R;
+import com.nikitavenediktov.sportapp.Views.Main.CalendarFragment;
+
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class DayDoneTrainingsAdapter extends RecyclerView.Adapter<DayDoneTrainingsAdapter.MyViewHolder> {
     private Context context;

@@ -1,4 +1,4 @@
-package com.nikitavenediktov.sportapp;
+package com.nikitavenediktov.sportapp.Views.TrainingIntro;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.nikitavenediktov.sportapp.Models.Exercise;
+import com.nikitavenediktov.sportapp.R;
 
 import java.util.ArrayList;
 

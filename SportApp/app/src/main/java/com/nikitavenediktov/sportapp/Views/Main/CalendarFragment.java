@@ -1,14 +1,12 @@
-package com.nikitavenediktov.sportapp;
+package com.nikitavenediktov.sportapp.Views.Main;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CalendarView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,14 +14,16 @@ import androidx.fragment.app.Fragment;
 
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
+import com.nikitavenediktov.sportapp.Views.DayDoneTrainings.DayDoneTrainingsActivity;
+import com.nikitavenediktov.sportapp.Models.DoneTraining;
+import com.nikitavenediktov.sportapp.R;
+import com.nikitavenediktov.sportapp.Db.SportDbHelper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 

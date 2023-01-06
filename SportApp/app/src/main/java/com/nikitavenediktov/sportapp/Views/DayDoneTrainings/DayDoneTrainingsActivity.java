@@ -1,4 +1,4 @@
-package com.nikitavenediktov.sportapp;
+package com.nikitavenediktov.sportapp.Views.DayDoneTrainings;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.nikitavenediktov.sportapp.Models.DoneTraining;
+import com.nikitavenediktov.sportapp.R;
+import com.nikitavenediktov.sportapp.Db.SportDbHelper;
+import com.nikitavenediktov.sportapp.Views.Main.CalendarFragment;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

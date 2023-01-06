@@ -1,15 +1,16 @@
-package com.nikitavenediktov.sportapp;
+package com.nikitavenediktov.sportapp.Notifications;
 
-import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+
+import com.nikitavenediktov.sportapp.Views.Main.MainActivity;
+import com.nikitavenediktov.sportapp.R;
 
 public class ReminderBroadcast extends BroadcastReceiver {
 

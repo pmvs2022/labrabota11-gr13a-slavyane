@@ -1,4 +1,4 @@
-package com.nikitavenediktov.sportapp;
+package com.nikitavenediktov.sportapp.Models;
 
 import com.github.sundeepk.compactcalendarview.domain.Event;
 

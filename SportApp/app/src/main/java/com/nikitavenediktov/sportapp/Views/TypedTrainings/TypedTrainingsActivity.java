@@ -1,18 +1,16 @@
-package com.nikitavenediktov.sportapp;
+package com.nikitavenediktov.sportapp.Views.TypedTrainings;
 
-import android.app.ListActivity;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Pair;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.nikitavenediktov.sportapp.Models.Training;
+import com.nikitavenediktov.sportapp.R;
+import com.nikitavenediktov.sportapp.Db.SportDbHelper;
 
 import java.util.ArrayList;
 
