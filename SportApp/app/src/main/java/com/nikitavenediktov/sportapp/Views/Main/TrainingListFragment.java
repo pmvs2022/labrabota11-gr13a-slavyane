@@ -1,19 +1,17 @@
-package com.nikitavenediktov.sportapp;
-
-import android.app.ListActivity;
+package com.nikitavenediktov.sportapp.Views.Main;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Pair;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.ListFragment;
+
+import com.nikitavenediktov.sportapp.Db.SportDbHelper;
+import com.nikitavenediktov.sportapp.Views.TypedTrainings.TypedTrainingsActivity;
+
 import java.util.ArrayList;
 
 public class TrainingListFragment extends ListFragment implements AdapterView.OnItemClickListener {

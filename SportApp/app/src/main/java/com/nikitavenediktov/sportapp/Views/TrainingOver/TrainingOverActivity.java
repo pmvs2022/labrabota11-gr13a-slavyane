@@ -1,4 +1,4 @@
-package com.nikitavenediktov.sportapp;
+package com.nikitavenediktov.sportapp.Views.TrainingOver;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,6 +12,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.nikitavenediktov.sportapp.Models.Exercise;
+import com.nikitavenediktov.sportapp.R;
+import com.nikitavenediktov.sportapp.Db.SportDbHelper;
 
 import java.util.ArrayList;
 

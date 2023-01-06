@@ -1,4 +1,4 @@
-package com.nikitavenediktov.sportapp;
+package com.nikitavenediktov.sportapp.Db;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -7,14 +7,14 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.text.method.SingleLineTransformationMethod;
-import android.util.Pair;
 
 import androidx.annotation.Nullable;
 
+import com.nikitavenediktov.sportapp.Models.DoneTraining;
+import com.nikitavenediktov.sportapp.Models.Exercise;
+import com.nikitavenediktov.sportapp.Models.Training;
+
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.HashMap;
 
 public class SportDbHelper extends SQLiteOpenHelper {
 
@@ -438,35 +438,13 @@ public class SportDbHelper extends SQLiteOpenHelper {
 
         } while(cursor.moveToNext());
 
-        /*Cursor cursor = db.query(TABLE_DONE_TRAINING_NAME, null,
-                (start_date == null ? null : "date(" + COLUMN_START_DATE + ")=?"),
-                (start_date == null ? null : new String[]{start_date}),
-                null, null, null);
-
-        if (cursor == null || !cursor.moveToFirst())
-            return doneTrainings;
-
-        id_index = cursor.getColumnIndex(COLUMN_ID);
-        training_id_index = cursor.getColumnIndex(COLUMN_FK_TRAINING);
-        duration_index = cursor.getColumnIndex(COLUMN_DURATION);
-        start_date_index = cursor.getColumnIndex(COLUMN_START_DATE);
-
-        do {
-            int id = cursor.getInt(id_index),
-                    training_id = cursor.getInt(training_id_index),
-                    duration = cursor.getInt(duration_index);
-            start_date = cursor.getString(start_date_index);
-
-            doneTrainings.add(new DoneTraining(id, training_id, duration, start_date));
-        } while(cursor.moveToNext());*/
-
         return doneTrainings;
     }
 
 
     private Exercise getExercise(int id)
     {
-        int id_index, title_index, gif_index, desc_index;
+        int id_index, title_index, desc_index;
 
         SQLiteDatabase db = this.getReadableDatabase();
 

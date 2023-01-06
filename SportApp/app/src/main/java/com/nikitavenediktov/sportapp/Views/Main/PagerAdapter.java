@@ -1,4 +1,4 @@
-package com.nikitavenediktov.sportapp;
+package com.nikitavenediktov.sportapp.Views.Main;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,6 +8,10 @@ import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.Fragment;
+
+import com.nikitavenediktov.sportapp.R;
+import com.nikitavenediktov.sportapp.Views.Main.CalendarFragment;
+import com.nikitavenediktov.sportapp.Views.Main.TrainingListFragment;
 
 public class PagerAdapter extends FragmentPagerAdapter {
 

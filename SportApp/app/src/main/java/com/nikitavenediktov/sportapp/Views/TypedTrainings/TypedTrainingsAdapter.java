@@ -1,20 +1,20 @@
-package com.nikitavenediktov.sportapp;
+package com.nikitavenediktov.sportapp.Views.TypedTrainings;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.text.Layout;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.nikitavenediktov.sportapp.Models.Training;
+import com.nikitavenediktov.sportapp.R;
+import com.nikitavenediktov.sportapp.Views.TrainingIntro.TrainingIntroActivity;
 
 import java.util.ArrayList;
 
