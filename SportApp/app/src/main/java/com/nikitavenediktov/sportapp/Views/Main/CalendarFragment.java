@@ -64,10 +64,16 @@ public class CalendarFragment extends Fragment
         calendar.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
-                Intent intent = new Intent(getActivity(), DayDoneTrainingsActivity.class);
-                intent.putExtra("date", DATE_FORMAT_DAY.format(dateClicked));
-
-                startActivity(intent);
+                for (DoneTraining doneTraining : doneTrainings)
+                {
+                    if (doneTraining.start_date.contains(DATE_FORMAT_DAY.format(dateClicked)))
+                    {
+                        Intent intent = new Intent(getActivity(), DayDoneTrainingsActivity.class);
+                        intent.putExtra("date", DATE_FORMAT_DAY.format(dateClicked));
+                        startActivity(intent);
+                        break;
+                    }
+                }
             }
 
             @Override
