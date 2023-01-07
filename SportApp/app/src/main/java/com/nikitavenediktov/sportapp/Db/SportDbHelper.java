@@ -127,6 +127,13 @@ public class SportDbHelper extends SQLiteOpenHelper {
                     {"legs_swinging", "45s"}
             });
 
+            insertTraining(db, "medium", "legs", new String[][]{
+                    {"glute_bridge_steps", "20"},
+                    {"dumbbell_swinging", "10"},
+                    {"reverse_lunges", "14"},
+                    {"situps",  "30"}
+            });
+
             db.setTransactionSuccessful();
             db.endTransaction();
 
@@ -326,12 +333,12 @@ public class SportDbHelper extends SQLiteOpenHelper {
         int id_index, type_id_index, complexity_index;
         ArrayList<Training> trainings = new ArrayList<>();
 
-        String request = String.format("SELECT %s.* FROM %s INNER JOIN %s on %s.%s = %s.%s WHERE %s.%s=?;"
+        String query = String.format("SELECT %s.* FROM %s INNER JOIN %s on %s.%s = %s.%s WHERE %s.%s=?;"
                 , TABLE_TRAINING_NAME, TABLE_TRAINING_NAME, TABLE_TYPE_NAME, TABLE_TRAINING_NAME,
                 COLUMN_FK_TYPE, TABLE_TYPE_NAME, COLUMN_ID, TABLE_TYPE_NAME, COLUMN_TITLE);
 
         @SuppressLint("Recycle")
-        Cursor cursor = db.rawQuery(request, new String[]{type});
+        Cursor cursor = db.rawQuery(query, new String[]{type});
 
         if (cursor == null || !cursor.moveToFirst())
             return trainings;
@@ -376,21 +383,30 @@ public class SportDbHelper extends SQLiteOpenHelper {
     public ArrayList<Exercise> getTrainingExercises(int training_id)
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        int exercise_index;
-
         ArrayList<Exercise> exercises = new ArrayList<>();
+        int id_index, title_index, desc_index;
+        String query = String.format("SELECT %s.* FROM %s INNER JOIN %s ON %s.%s = %s.%s " +
+                "INNER JOIN %s ON %s.%s = %s.%s WHERE %s.%s=?;", TABLE_EXERCISE_NAME, TABLE_EXERCISE_NAME,
+                TABLE_TRAINING_EXERCISE_NAME, TABLE_EXERCISE_NAME, COLUMN_ID, TABLE_TRAINING_EXERCISE_NAME,
+                COLUMN_FK_EXERCISE, TABLE_TRAINING_NAME, TABLE_TRAINING_EXERCISE_NAME, COLUMN_FK_TRAINING,
+                TABLE_TRAINING_NAME, COLUMN_ID, TABLE_TRAINING_NAME, COLUMN_ID);
 
-        Cursor cursor = db.query(TABLE_TRAINING_EXERCISE_NAME, new String[]{COLUMN_FK_EXERCISE},
-                COLUMN_FK_TRAINING + "=?",
-                new String[]{Integer.toString(training_id)}, null, null, null);
+        Cursor cursor = db.rawQuery(query, new String[] {Integer.toString(training_id)});
 
         if (cursor == null || !cursor.moveToFirst())
             return exercises;
-        exercise_index = cursor.getColumnIndex(COLUMN_FK_EXERCISE);
+
+        id_index = cursor.getColumnIndex(COLUMN_ID);
+        title_index = cursor.getColumnIndex(COLUMN_TITLE);
+        desc_index = cursor.getColumnIndex(COLUMN_DESC);
 
         do {
-            int ex_id = cursor.getInt(exercise_index);
-            exercises.add(getExercise(ex_id));
+            int id = cursor.getInt(id_index);
+            String title = cursor.getString(title_index),
+            desc = cursor.getString(desc_index);
+
+            exercises.add(new Exercise(id, title, desc));
+
         } while(cursor.moveToNext());
 
         return exercises;
@@ -402,7 +418,7 @@ public class SportDbHelper extends SQLiteOpenHelper {
         ArrayList<DoneTraining> doneTrainings = new ArrayList<>();
         int id_index, training_id_index, duration_index, start_date_index, type_title_index,
                 complexity_index;
-        String request =
+        String query =
                 String.format("SELECT %s.*, %s.%s, %s.%s FROM %s INNER JOIN %s ON %s.%s = %s.%s " +
                         "INNER JOIN %s ON %s.%s = %s.%s", TABLE_DONE_TRAINING_NAME, TABLE_TYPE_NAME,
                         COLUMN_TITLE, TABLE_TRAINING_NAME, COLUMN_COMPLEXITY, TABLE_DONE_TRAINING_NAME,
@@ -410,11 +426,11 @@ public class SportDbHelper extends SQLiteOpenHelper {
                         TABLE_TRAINING_NAME, COLUMN_ID, TABLE_TYPE_NAME, TABLE_TRAINING_NAME,
                         COLUMN_FK_TYPE, TABLE_TYPE_NAME, COLUMN_ID);
 
-        request += (start_date == null) ? ";" : String.format(" WHERE date(%s.%s)=?;",
+        query += (start_date == null) ? ";" : String.format(" WHERE date(%s.%s)=?;",
                 TABLE_DONE_TRAINING_NAME, COLUMN_START_DATE);
 
-        Cursor cursor = (start_date == null) ? db.rawQuery(request, null) :
-                db.rawQuery(request, new String[]{start_date});
+        Cursor cursor = (start_date == null) ? db.rawQuery(query, null) :
+                db.rawQuery(query, new String[]{start_date});
 
         if (cursor == null || !cursor.moveToFirst())
             return doneTrainings;
@@ -439,28 +455,6 @@ public class SportDbHelper extends SQLiteOpenHelper {
         } while(cursor.moveToNext());
 
         return doneTrainings;
-    }
-
-
-    private Exercise getExercise(int id)
-    {
-        int id_index, title_index, desc_index;
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.query(TABLE_EXERCISE_NAME,null, COLUMN_ID + "=?",
-                new String[]{Integer.toString(id)}, null, null, null);
-
-        if (cursor == null || !cursor.moveToFirst())
-            return null;
-
-        id_index = cursor.getColumnIndex(COLUMN_ID);
-        title_index = cursor.getColumnIndex(COLUMN_TITLE);
-        desc_index = cursor.getColumnIndex(COLUMN_DESC);
-
-        Exercise exercise = new Exercise(cursor.getInt(id_index), cursor.getString(title_index), cursor.getString(desc_index));
-
-        return exercise;
     }
 
 
