@@ -56,7 +56,7 @@ public class ExercisesPipelineActivity extends AppCompatActivity implements View
 
         cont_button = (Button) findViewById(R.id.cont_btn);
 
-        time_pb = (ProgressBar) findViewById(R.id.time_bar);
+        time_pb = (ProgressBar) findViewById(R.id.loading_bar);
 
         action_gif = (GifImageView) findViewById(R.id.action_gif);
 

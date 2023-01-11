@@ -26,6 +26,10 @@
     <string name="hey">Hey!</string>
     <string name="duration">Duration:</string>
     <string name="start_time">Start time:</string>
+    <string name="reload">Reload</string>
+    <string name="sports_facts">Facts</string>
+    <string name="network_error">Error: Unable to load facts</string>
+    <string name="parsing_error">Error: Unable to parse response</string>
 
     <string name="legs">Legs</string>
     <string name="back">Back</string>

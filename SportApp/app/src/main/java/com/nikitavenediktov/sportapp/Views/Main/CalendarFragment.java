@@ -52,6 +52,8 @@ public class CalendarFragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
+        super.onCreateView(inflater, container, savedInstanceState);
+
         View rootVew = inflater.inflate(R.layout.custom_calendar_tab, container, false);
 
         calendar = (CompactCalendarView) rootVew.findViewById(R.id.calendar);

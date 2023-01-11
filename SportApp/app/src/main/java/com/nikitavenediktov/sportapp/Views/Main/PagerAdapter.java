@@ -16,7 +16,7 @@ import com.nikitavenediktov.sportapp.Views.Main.TrainingListFragment;
 public class PagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[] {R.string.trainings, R.string.calendar};
+    private static final int[] TAB_TITLES = new int[] {R.string.trainings, R.string.calendar, R.string.sports_facts};
 
     private final Context mContext;
 
@@ -36,17 +36,18 @@ public class PagerAdapter extends FragmentPagerAdapter {
         {
             case 0:
                 fragment = new TrainingListFragment();
-                args = new Bundle();
-                args.putInt(null, position + 1);
-                fragment.setArguments(args);
                 break;
             case 1:
                 fragment = new CalendarFragment();
-                args = new Bundle();
-                args.putInt(null, position + 1);
-                fragment.setArguments(args);
+                break;
+            case 2:
+                fragment = new FactsFragment();
                 break;
         }
+
+        args = new Bundle();
+        args.putInt(null, position + 1);
+        fragment.setArguments(args);
 
         return fragment;
     }
@@ -59,7 +60,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
-    public int getCount() { return 2; }
+    public int getCount() { return TAB_TITLES.length; }
 
 }
 

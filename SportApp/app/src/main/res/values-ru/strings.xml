@@ -26,6 +26,10 @@
     <string name="hey">Эй!</string>
     <string name="duration">Продолжительность:</string>
     <string name="start_time">Время начала:</string>
+    <string name="reload">Перезагрузить</string>
+    <string name="sports_facts">Факты</string>
+    <string name="network_error">Ошибка: невозможно загрузить факты</string>
+    <string name="parsing_error">Ошибка в представлении результата</string>
 
     <string name="legs">Ноги</string>
     <string name="back">Спина</string>
