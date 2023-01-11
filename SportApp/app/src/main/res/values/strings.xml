@@ -37,16 +37,23 @@
     <string name="biceps">Biceps</string>
     <string name="general">General training</string>
 
-    <string name="twisting">Twisting</string>
+    <string name="sit_ups">Sit ups</string>
     <string name="elbow_plank">Elbow plank</string>
     <string name="horizontal_scissors">Horizontal scissors</string>
-    <string name="climber">Climber</string>
-    <string name="legs_lift">Legs lift</string>
+    <string name="climber">Mountain climber</string>
+    <string name="legs_lifts">Legs lift</string>
     <string name="side_twisting">Side twisting</string>
     <string name="side_plank">Side plank</string>
     <string name="legs_swinging">Legs swinging</string>
     <string name="glute_bridge_steps">Glute bridge steps</string>
     <string name="dumbbell_swinging">Dumbbell swinging</string>
     <string name="reverse_lunges">Reverse lunges</string>
-    <string name="situps">Sit-ups</string>
+    <string name="squats">Squats</string>
+    <string name="pistol_squats">Pistol squats</string>
+    <string name="side_lunges">Side lunges</string>
+    <string name="calf_raising">Calf raising</string>
+    <string name="pull_ups">Pull-ups</string>
+    <string name="renegade_row">Renegade row</string>
+    <string name="dumbbell_pullover">Dumbbell pullover</string>
+    <string name="dumbbell_upright_row">Dumbbell upright row</string>
 </resources>

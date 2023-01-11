@@ -37,16 +37,23 @@
     <string name="biceps">Бицепс</string>
     <string name="general">Общая тренировка</string>
 
-    <string name="twisting">Скручивания</string>
+    <string name="sit_ups">Скручивания</string>
     <string name="elbow_plank">Планка на локтях</string>
     <string name="horizontal_scissors">Горизонтальные ножницы</string>
     <string name="climber">Альпинист</string>
-    <string name="legs_lift">Подъемы ног</string>
+    <string name="legs_lifts">Подъемы ног</string>
     <string name="side_twisting">Боковые скручивания</string>
     <string name="side_plank">Боковая планка</string>
     <string name="legs_swinging">Сгибание ног</string>
     <string name="glute_bridge_steps">Шаги в ягодичном мостике</string>
     <string name="dumbbell_swinging">Махи гантелью</string>
     <string name="reverse_lunges">Обратные выпады</string>
-    <string name="situps">Приседания</string>
+    <string name="squats">Приседания</string>
+    <string name="pistol_squats">Приседания \"пистолетиком\"</string>
+    <string name="side_lunges">Боковые выпады</string>
+    <string name="calf_raising">Подъем на носки</string>
+    <string name="pull_ups">Подтягивания</string>
+    <string name="renegade_row">Тяга гантелей в наклоне</string>
+    <string name="dumbbell_pullover">Запрокидывание гантели</string>
+    <string name="dumbbell_upright_row">Вертикальная тяга гантелей</string>
 </resources>

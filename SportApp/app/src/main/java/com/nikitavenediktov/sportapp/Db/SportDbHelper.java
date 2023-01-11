@@ -90,14 +90,14 @@ public class SportDbHelper extends SQLiteOpenHelper {
             insertType(db, "general");
 
             //for press N1
-            insertExercise(db, "twisting", "12");
+            insertExercise(db, "sit_ups", "12");
             insertExercise(db, "elbow_plank", "20s");
             insertExercise(db, "horizontal_scissors",  "16");
             insertExercise(db, "climber", "14");
 
             //for press N2
-            insertExercise(db, "twisting", "20");
-            insertExercise(db, "legs_lift", "15");
+            insertExercise(db, "sit_ups", "20");
+            insertExercise(db, "legs_lifts", "15");
             insertExercise(db, "side_twisting", "20");
             insertExercise(db, "elbow_plank", "50s");
             insertExercise(db, "side_plank", "35s");
@@ -107,11 +107,22 @@ public class SportDbHelper extends SQLiteOpenHelper {
             insertExercise(db, "glute_bridge_steps", "20");
             insertExercise(db, "dumbbell_swinging", "10");
             insertExercise(db, "reverse_lunges", "14");
-            insertExercise(db, "situps",  "30");
+            insertExercise(db, "squats",  "30");
+
+            //for legs N2
+            insertExercise(db, "pistol_squats", "15");
+            insertExercise(db, "side_lunges", "30");
+            insertExercise(db, "calf_raising", "30");
+
+            //for back N1
+            insertExercise(db, "pull_ups", "10");
+            insertExercise(db, "renegade_row", "12");
+            insertExercise(db, "dumbbell_pullover", "12");
+            insertExercise(db, "dumbbell_upright_row", "12");
 
             //press N1
             insertTraining(db, "easy", "press", new String[][]{
-                    {"twisting", "12"},
+                    {"sit_ups", "12"},
                     {"elbow_plank", "20s"},
                     {"horizontal_scissors", "16"},
                     {"climber", "14"}
@@ -119,19 +130,39 @@ public class SportDbHelper extends SQLiteOpenHelper {
 
             //press N2
             insertTraining(db, "hard", "press", new String[][]{
-                    {"twisting", "20"},
-                    {"legs_lift", "15"},
+                    {"sit_ups", "20"},
+                    {"legs_lifts", "15"},
                     {"side_twisting", "20"},
                     {"elbow_plank", "50s"},
                     {"side_plank", "35s"},
                     {"legs_swinging", "45s"}
             });
 
+            //legs N1
             insertTraining(db, "medium", "legs", new String[][]{
                     {"glute_bridge_steps", "20"},
                     {"dumbbell_swinging", "10"},
                     {"reverse_lunges", "14"},
-                    {"situps",  "30"}
+                    {"squats",  "30"}
+            });
+
+
+            //legs N2
+            insertTraining(db, "hard", "legs", new String[][]{
+                    {"squats",  "30"},
+                    {"pistol_squats", "15"},
+                    {"side_lunges", "30"},
+                    {"calf_raising", "30"},
+                    {"squats",  "30"}
+            });
+
+            //back N1
+            insertTraining(db, "medium", "back", new String[][]{
+                    {"pull_ups", "10"},
+                    {"dumbbell_swinging", "10"},
+                    {"renegade_row", "12"},
+                    {"dumbbell_pullover", "12"},
+                    {"dumbbell_upright_row", "12"}
             });
 
             db.setTransactionSuccessful();
