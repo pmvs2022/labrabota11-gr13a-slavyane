@@ -45,4 +45,5 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.23'
 
     implementation 'com.github.sundeepk:compact-calendar-view:3.0.0'
+    implementation 'com.android.volley:volley:1.2.1'
 }
