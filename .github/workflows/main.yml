@@ -68,4 +68,8 @@ jobs:
       - name: Run UI Tests in Test Lab
         run: |
           chmod +wx SportApp
-          gcloud firebase test android run --app app-release.apk --robo-script SportApp/app/ui_test/robo_script.json --device model=Pixel5,version=30,locale=en,orientation=portrait
+          gcloud firebase test android run --app app-release.apk --robo-script SportApp/app/ui_test/calendar_check_script.json --device model=Pixel5,version=30,locale=en,orientation=portrait
+          gcloud firebase test android run --app app-release.apk --robo-script SportApp/app/ui_test/checkout_training_sets_script.json --device model=Pixel5,version=30,locale=en,orientation=portrait
+          gcloud firebase test android run --app app-release.apk --robo-script SportApp/app/ui_test/facts_reloading_script.json --device model=Pixel5,version=30,locale=en,orientation=portrait
+          gcloud firebase test android run --app app-release.apk --robo-script SportApp/app/ui_test/legs_training_script.json --device model=Pixel5,version=30,locale=en,orientation=portrait
+          gcloud firebase test android run --app app-release.apk --robo-script SportApp/app/ui_test/press_training_script.json --device model=Pixel5,version=30,locale=en,orientation=portrait
