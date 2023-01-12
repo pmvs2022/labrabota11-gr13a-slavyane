@@ -58,6 +58,11 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: TargetAPK
+      - name: Firebase auth with gcloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.FIREBASE_KEY }}
+          project_id: ${{ secrets.PROJECT_ID }}
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v1
       - name: Run UI Tests in Test Lab
