@@ -58,17 +58,9 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: TargetAPK
-
-      - name: Login in Firebase with CI token
-        uses: google-github-actions/auth@v1
-        with:
-          credentials_json: ${{ secrets.FIREBASE_TOKEN }}
-          project_id: ${{ secrets.PROJECT_ID }}
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v1
-
       - name: Run UI Tests in Test Lab
         run: |
           chmod +wx SportApp
-          gcloud firebase test android models list
           gcloud firebase test android run --app app-release.apk --robo-script SportApp/app/ui_test/robo_script.json --device model=Pixel6,version=33,locale=en,orientation=portrait
