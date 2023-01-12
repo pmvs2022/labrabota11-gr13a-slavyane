@@ -100,6 +100,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="76dp"
+        android:gravity="center"
         android:text="la-la-la"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
