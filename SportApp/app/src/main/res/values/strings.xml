@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SportApp</string>
+    <string name="app_name">PE-ing</string>
     <string name="trainings">Trainings</string>
     <string name="training">Training</string>
     <string name="calendar">Calendar</string>
@@ -56,4 +56,11 @@
     <string name="renegade_row">Renegade row</string>
     <string name="dumbbell_pullover">Dumbbell pullover</string>
     <string name="dumbbell_upright_row">Dumbbell upright row</string>
+    <string name="close_grip_seated_cable_row">Close-grip seated cable row</string>
+    <string name="back_extensions">Back extensions</string>
+    <string name="standing_dumbbell_curl">Standing dumbbell curl</string>
+    <string name="incline_dumbbell_curl">Incline dumbbell curl</string>
+    <string name="overhead_press">Overhead press</string>
+    <string name="prone_dumbbell_spider_curl">Prone dumbbell spider curl</string>
+    <string name="zottman_curl"></string>
 </resources>

@@ -120,6 +120,22 @@ public class SportDbHelper extends SQLiteOpenHelper {
             insertExercise(db, "dumbbell_pullover", "12");
             insertExercise(db, "dumbbell_upright_row", "12");
 
+            //for back N2
+            insertExercise(db, "close_grip_seated_cable_row", "12");
+            insertExercise(db, "back_extensions", "12");
+            insertExercise(db, "pull_ups", "15");
+
+            //for biceps N1
+            insertExercise(db, "standing_dumbbell_curl", "16");
+            insertExercise(db, "incline_dumbbell_curl", "16");
+            insertExercise(db, "overhead_press", "12");
+            insertExercise(db, "prone_dumbbell_spider_curl", "10");
+
+            //for biceps N2
+            insertExercise(db, "standing_dumbbell_curl", "20");
+            insertExercise(db, "zottman_curl", "12");
+            insertExercise(db, "overhead_press", "18");
+
             //press N1
             insertTraining(db, "easy", "press", new String[][]{
                     {"sit_ups", "12"},
@@ -163,6 +179,51 @@ public class SportDbHelper extends SQLiteOpenHelper {
                     {"renegade_row", "12"},
                     {"dumbbell_pullover", "12"},
                     {"dumbbell_upright_row", "12"}
+            });
+
+            //back N2
+            insertTraining(db, "hard", "back", new String[][]{
+                    {"pull_ups", "15"},
+                    {"back_extensions", "12"},
+                    {"renegade_row", "12"},
+                    {"close_grip_seated_cable_row", "12"},
+                    {"pull_ups", "10"},
+                    {"back_extensions", "12"}
+            });
+
+            //biceps N1
+            insertTraining(db, "medium", "biceps", new String[][]{
+                    {"standing_dumbbell_curl", "16"},
+                    {"incline_dumbbell_curl", "16"},
+                    {"overhead_press", "12"},
+                    {"prone_dumbbell_spider_curl", "10"},
+                    {"close_grip_seated_cable_row", "12"}
+            });
+
+            //biceps N2
+            insertTraining(db, "hard", "biceps", new String[][]{
+                    {"pull_ups", "15"},
+                    {"standing_dumbbell_curl", "20"},
+                    {"zottman_curl", "12"},
+                    {"overhead_press", "18"},
+                    {"close_grip_seated_cable_row", "12"}
+            });
+
+            //general N1
+            insertTraining(db, "easy", "general", new String[][]{
+                    {"sit_ups", "12"},
+                    {"climber", "14"},
+                    {"side_plank", "35s"},
+                    {"side_lunges", "30"},
+            });
+
+            //general N2
+            insertTraining(db, "medium", "general", new String[][] {
+                    {"side_twisting", "20"},
+                    {"glute_bridge_steps", "20"},
+                    {"squats",  "30"},
+                    {"dumbbell_pullover", "12"},
+                    {"legs_swinging", "45s"}
             });
 
             db.setTransactionSuccessful();

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SportApp</string>
+    <string name="app_name">PE-ing</string>
     <string name="trainings">Тренировки</string>
     <string name="training">Тренировка</string>
     <string name="calendar">Календарь</string>
@@ -56,4 +56,11 @@
     <string name="renegade_row">Тяга гантелей в наклоне</string>
     <string name="dumbbell_pullover">Запрокидывание гантели</string>
     <string name="dumbbell_upright_row">Вертикальная тяга гантелей</string>
+    <string name="close_grip_seated_cable_row">Тяга кабеля сидя узким хватом</string>
+    <string name="back_extensions">Экстензии спины и бедер</string>
+    <string name="standing_dumbbell_curl">Сгибание рук с гантелями стоя</string>
+    <string name="incline_dumbbell_curl">Сгибание рук с гантелями на наклонной скамье</string>
+    <string name="overhead_press">Жим гантелей над головой</string>
+    <string name="prone_dumbbell_spider_curl">\"Паук\" с гантелями лежа</string>
+    <string name="zottman_curl">Сгибания Зотмана</string>
 </resources>
