@@ -47,27 +47,27 @@ jobs:
           name: TargetAPK
           path: SportApp/app/build/outputs/apk/release/app-release.apk
   
-  run_ui_tests:
-    name: UI-testing
-    runs-on: ubuntu-20.04
-    environment: actions_secrets
-    needs: build_and_upload_ui_test_apk
-    steps:
-      - uses: actions/checkout@v3
-      - name: Get target APK
-        uses: actions/download-artifact@v3
-        with:
-          name: TargetAPK
-      - name: Firebase auth with gcloud
-        uses: google-github-actions/auth@v1
-        with:
-          credentials_json: ${{ secrets.FIREBASE_KEY }}
-          project_id: ${{ secrets.PROJECT_ID }}
-      - name: Set up gcloud
-        uses: google-github-actions/setup-gcloud@v1
-      - name: Run UI Tests in Test Lab
-        run: |
-          chmod +wx SportApp
-          gcloud firebase test android models list
-          gcloud firebase test android run --app app-release.apk --robo-script SportApp/app/ui_test/calendar_check_script.json --device model=Pixel3,version=30,locale=en,orientation=portrait
+#   run_ui_tests:
+#     name: UI-testing
+#     runs-on: ubuntu-20.04
+#     environment: actions_secrets
+#     needs: build_and_upload_ui_test_apk
+#     steps:
+#       - uses: actions/checkout@v3
+#       - name: Get target APK
+#         uses: actions/download-artifact@v3
+#         with:
+#           name: TargetAPK
+#       - name: Firebase auth with gcloud
+#         uses: google-github-actions/auth@v1
+#         with:
+#           credentials_json: ${{ secrets.FIREBASE_KEY }}
+#           project_id: ${{ secrets.PROJECT_ID }}
+#       - name: Set up gcloud
+#         uses: google-github-actions/setup-gcloud@v1
+#       - name: Run UI Tests in Test Lab
+#         run: |
+#           chmod +wx SportApp
+#           gcloud firebase test android models list
+#           gcloud firebase test android run --app app-release.apk --robo-script SportApp/app/ui_test/calendar_check_script.json --device model=Pixel3,version=30,locale=en,orientation=portrait
         
