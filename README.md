@@ -20,8 +20,8 @@
 3. Узнать интересные спортивные факты в разделе "Facts". Для использования этого функционала необходим доступ в интернет. Нажатие кнопки "Перезагрузить" приводит к загрузке новых фактов.
 # Contributing: 
    ## Team slavyane - 13 group 3 course, BSU:
-   * [Emelyanenko Pavel](https://github.com/AllerleiMal): Team-lead, Senior-developer.
-   * [Venediktov Nikita](https://github.com/NikitaVen): Database designer, Senior-developer.
-   * [Ryzhkov Yaroslav](https://github.com/Creator674): PM, QA BA, Senior-developer.
+   * [Emelyanenko Pavel](https://github.com/AllerleiMal): Architecture, Database, CI, Testing, Documentation, Diagrams.
+   * [Venediktov Nikita](https://github.com/NikitaVen): Architecture, Database, UI, Development, Documentation, Diagrams.
+   * [Ryzhkov Yaroslav](https://github.com/Creator674): Presentations, Documentation, Requirements, Cutie.
 
 © slavyane-team LLC, 2023.
