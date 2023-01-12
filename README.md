@@ -22,6 +22,6 @@
    ## Team slavyane - 13 group 3 course, BSU:
    * [Emelyanenko Pavel](https://github.com/AllerleiMal): Architecture, Database, CI, Testing, Documentation, Diagrams.
    * [Venediktov Nikita](https://github.com/NikitaVen): Architecture, Database, UI, Development, Documentation, Diagrams.
-   * [Ryzhkov Yaroslav](https://github.com/Creator674): Presentations, Documentation, Requirements, Cutie.
+   * [Ryzhkov Yaroslav](https://github.com/Creator674): Presentation, Documentation, Requirements, Cutie, Diagrams.
 
 © slavyane-team LLC, 2023.
