@@ -12,6 +12,8 @@ import androidx.fragment.app.ListFragment;
 import com.nikitavenediktov.sportapp.Db.SportDbHelper;
 import com.nikitavenediktov.sportapp.Views.TypedTrainings.TypedTrainingsActivity;
 
+import com.nikitavenediktov.sportapp.R;
+
 import java.util.ArrayList;
 
 public class TrainingListFragment extends ListFragment implements AdapterView.OnItemClickListener {
@@ -30,7 +32,7 @@ public class TrainingListFragment extends ListFragment implements AdapterView.On
         super.onActivityCreated(savedInstanceState);
         SportDbHelper dbHelper = SportDbHelper.getInstance(this.getActivity());
         types = dbHelper.getTypes();
-       // dbHelper.close();
+
         ArrayList<String> types_titles = new ArrayList<>();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -38,8 +40,7 @@ public class TrainingListFragment extends ListFragment implements AdapterView.On
                     .getResources().getIdentifier(type, "string", getActivity().getPackageName()))));
         }
         getListView().setOnItemClickListener(this);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_list_item_1, types_titles);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(), R.layout.training_list_item, types_titles);
         setListAdapter(adapter);
     }
 
