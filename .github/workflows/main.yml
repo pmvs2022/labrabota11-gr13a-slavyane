@@ -23,6 +23,7 @@ jobs:
       - name: Run tests
         run: |
           cd ./SportApp
+          emulator -list-avds
           chmod +x gradlew
           ./gradlew test
           ./gradlew connectedAndroidTest
