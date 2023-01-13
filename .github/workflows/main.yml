@@ -24,10 +24,16 @@ jobs:
       - name: Run tests
         run: |
           cd ./SportApp
-          emulator -list-avds
           chmod +x gradlew
           ./gradlew test
-          ./gradlew connectedAndroidTest
+      - name: Instrumentation Tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+         api-level: 29
+         target: default
+         arch: x86
+         profile: Nexus 6
+         script: ./gradlew connectedCheck --stacktrace
   
   build_and_upload_ui_test_apk:
     name: Build and upload APK for UI-testing in Firebase
