@@ -61,6 +61,7 @@ public class TrainingOverActivity extends AppCompatActivity implements View.OnCl
         Uri uri = Uri.parse(bitmapPath);
 
         Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.setType("image/png");
         intent.putExtra(Intent.EXTRA_STREAM, uri);
         intent.putExtra(Intent.EXTRA_TEXT, message);
