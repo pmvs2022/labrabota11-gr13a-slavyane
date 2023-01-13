@@ -33,7 +33,7 @@ jobs:
          target: default
          arch: x86
          profile: Nexus 6
-         script: ./SportApp/gradlew connectedCheck --stacktrace
+         script: cd ./SportApp && chmod +x gradlew && ./gradlew connectedCheck --stacktrace
   
   build_and_upload_ui_test_apk:
     name: Build and upload APK for UI-testing in Firebase
