@@ -25,6 +25,7 @@ jobs:
           cd ./SportApp
           chmod +x gradlew
           ./gradlew test
+          ./gradlew connectedAndroidTest
   
   build_and_upload_ui_test_apk:
     name: Build and upload APK for UI-testing in Firebase
